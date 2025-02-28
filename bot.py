@@ -321,14 +321,15 @@ def button_handler(update: Update, context: CallbackContext) -> None:
 
 
 def main() -> None:
-  application = Application.builder().token(TOKEN).build()
-  application.add_handler(CommandHandler("start", start))
+    application = Application.builder().token(TOKEN).build()
+    application.add_handler(CommandHandler("start", start))
     
-    
-
-    
-    # Запускаем бота
-  application.run_polling()
+    # Для веб-хуков:
+    application.run_webhook(
+        listen="0.0.0.0",
+        port=8443,
+        webhook_url="https://your-domain.com"
+    )
 
 
 if __name__ == '__main__':
