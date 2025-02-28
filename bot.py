@@ -324,12 +324,14 @@ def main() -> None:
     application = Application.builder().token(TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     
-    # Для веб-хуков:
+    # Настройка вебхука для Railway/Heroku
     application.run_webhook(
         listen="0.0.0.0",
-        port=8443,
-        webhook_url="https://your-domain.com"
+        port=int(os.getenv("PORT", 8443)),
+        webhook_url=os.getenv("WEBHOOK_URL"),
+        secret_token="https://bot.doslin.railway.app"
     )
+
 
 
 if __name__ == '__main__':
